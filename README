@@ -1,0 +1,57 @@
+---------how to setup environment-----
+https://www.youtube.com/watch?v=2S1dgHpqCdk&t=41s
+
+1 go to anaconda website to download and install anaconda
+2. start anaconda prompt
+>> conda update conda
+>> nvidia-smi
+>> conda create --name torch-gpu
+>> conda activate torch-gpu
+
+3. goto pytorch.org to install pytorch. use CUDA 11.7 since that is what is shown on $nvidia-smi
+>> conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+
+The following python script checks if pytoch is installed and if gpu is accessible through torch
+>>python
+>>import torch
+>>print(torch.__version__)
+>>torch.cuda.is_available()
+>>exit()
+
+
+4.(Skippable)download and install pycharm IDE
+config>>settings>> conda env >> interpreter>> .../torch-gpu/...
+
+5. cd Desktop/whisper
+
+6. download and install whisper
+
+>>pip install -U openai-whisper
+>>conda install ffmpeg
+ 
+7. install django  
+>>conda install django
+
+------------------------ how to run and test whisper api ------
+>>cd whisper_api
+>>python manage.py runserver
+
+open another terminal
+>>cd Desktop
+>>cd whisper
+>>python test_api.py
+
+it will transcribe the 'test.wav' under /Desktop/whisper
+
+***If you want to try other model, change whisper/whisper_api/whiper_api/views.py model_name to "tiny" "small" "base" "medium" "large"
+...
+model_name = "medium"
+...
+
+
+-----------------------how to use this api -----------------
+8. set up the server like previously mentioned
+9. access the RESTful api endpoint in the format same as test_api.py
+10. get HTTP response of transcribed audio
+
+
